@@ -158,6 +158,26 @@ export default function App() {
         </div>
       </section>
 
+      {/* ── The Moment ── */}
+      <section className="moment-section" aria-labelledby="moment-heading">
+        <div className="moment-inner">
+          <h2 className="section-title reveal" id="moment-heading">THE MOMENT THAT STARTED IT ALL</h2>
+          <div className="moment-video reveal">
+            <div className="video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/3ZEY3HPRhxg?start=406"
+                title="Ryan Gosling talks about London foxes"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+          <p className="moment-caption reveal">
+            Ryan Gosling told London to celebrate its foxes. Put him on the merch, he said. So we did.
+          </p>
+        </div>
+      </section>
+
       {/* ── Products ── */}
       <section id="shop" className="products-section" aria-labelledby="shop-heading">
         <h2 className="section-title reveal" id="shop-heading">THE DROP</h2>
