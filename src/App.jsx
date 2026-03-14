@@ -49,20 +49,16 @@ const PRODUCTS = [
   {
     name: 'The Original',
     price: '£29.99',
-    tag: 'AS SEEN ON TV',
-    desc: 'The fox that started it all. Inspired by the streets that never sleep, this is where the legend began.',
-  },
-  {
-    name: 'The Classic',
-    price: '£29.99',
-    tag: 'CORE',
-    desc: 'Our everyday essential. Wear the story wherever you go. Built to last, designed to stand out.',
+    tag: 'THE ONE GOSLING DESCRIBED',
+    desc: 'The fox that started it all. Leaning against Big Ben, top hat on, started from the bottom. This is where the legend began.',
+    img: '/Fox 2.png',
   },
   {
     name: 'The Vintage',
     price: '£29.99',
     tag: 'LIMITED',
     desc: 'Washed, worn, weathered. Built for those who understand that the best things earn their character.',
+    img: '/Fox 3.png',
   },
 ]
 
@@ -172,9 +168,11 @@ export default function App() {
               className={`product-card reveal reveal-delay-${i + 1}`}
             >
               <div className="product-img">
-                <div className="product-img-bg" aria-hidden="true">
-                  <FoxIcon />
-                </div>
+                <img
+                  src={p.img}
+                  alt={p.name}
+                  className="product-img-photo"
+                />
                 <span className="product-tag">{p.tag}</span>
               </div>
               <div className="product-info">
