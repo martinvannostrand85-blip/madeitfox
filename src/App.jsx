@@ -47,18 +47,18 @@ function FoxIcon() {
 
 const PRODUCTS = [
   {
-    name: 'The Original',
+    name: 'The Windbreaker',
     price: '£29.99',
-    tag: 'THE ONE GOSLING DESCRIBED',
-    desc: 'The fox that started it all. Leaning against Big Ben, top hat on, started from the bottom. This is where the legend began.',
-    img: '/Fox 2.png',
+    tag: 'NEW DROP',
+    desc: 'Forest green. Fox on the chest. Built for the ones moving through the city at speed — whatever the weather.',
+    img: '/basic-unisex-windbreaker-forest-green-front-69b49deb93782.png',
   },
   {
-    name: 'The Vintage',
+    name: 'The Zip Hoodie',
     price: '£29.99',
-    tag: 'LIMITED',
-    desc: 'Washed, worn, weathered. Built for those who understand that the best things earn their character.',
-    img: '/Fox 3.png',
+    tag: 'CORE',
+    desc: 'Blacked out. Heavy blend. The fox rides the chest. For those who built something in the cold and never complained.',
+    img: '/unisex-heavy-blend-zip-hoodie-black-front-69b49bad4c8cd.png',
   },
 ]
 
