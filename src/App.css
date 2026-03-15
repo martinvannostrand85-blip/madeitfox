@@ -1112,6 +1112,22 @@ cite {
   padding-bottom: 24px;
 }
 
+.pp-size-guide-link {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  transition: color 0.2s;
+  margin-top: 8px;
+  display: inline-block;
+}
+
+.pp-size-guide-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .pp-container {
     padding: 24px 20px 80px;
@@ -1128,5 +1144,156 @@ cite {
 
   .pp-back {
     margin-bottom: 32px;
+  }
+}
+
+/* ─── Trust Pages (Shipping, FAQ, Size Guide) ────────── */
+.trust-page {
+  min-height: 100svh;
+  background: var(--bg);
+}
+
+.trust-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 40px 120px;
+}
+
+.trust-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 48px;
+}
+
+.trust-content h2 {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-top: 40px;
+  margin-bottom: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.trust-content h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.trust-content p {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.trust-content strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.trust-link {
+  color: var(--accent);
+  transition: opacity 0.2s;
+}
+
+.trust-link:hover {
+  opacity: 0.8;
+}
+
+/* ─── FAQ Accordion ──────────────────────────────────── */
+.faq-item {
+  border-top: 1px solid var(--border);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.faq-question:hover {
+  color: var(--accent);
+}
+
+.faq-icon {
+  font-size: 20px;
+  font-family: var(--font-body);
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-left: 16px;
+}
+
+.faq-answer {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.9;
+  color: var(--muted);
+  padding-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Size Tables ────────────────────────────────────── */
+.size-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 16px;
+}
+
+.size-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.size-table th {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--accent);
+}
+
+.size-table td {
+  color: var(--muted);
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.size-table tr:hover td {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .trust-container {
+    padding: 24px 20px 80px;
   }
 }

@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom'
 import { products, getCheckoutUrl } from './data/products'
+import ShippingPage from './components/ShippingPage'
+import FAQPage from './components/FAQPage'
+import SizeGuidePage from './components/SizeGuidePage'
 import './App.css'
 
 function useScrollReveal() {
@@ -313,28 +316,27 @@ function HomePage() {
             <div className="footer-col">
               <h4>SHOP</h4>
               <ul>
-                <li><a href="#">All Products</a></li>
-                <li><a href="#">New Arrivals</a></li>
-                <li><a href="#">Limited Drops</a></li>
-                <li><a href="#">Sale</a></li>
+                <li><Link to="/#shop">All Products</Link></li>
+                <li><Link to="/#shop">New Arrivals</Link></li>
+                <li><Link to="/#shop">Limited Drops</Link></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>INFO</h4>
               <ul>
-                <li><a href="#">Our Story</a></li>
-                <li><a href="#">Sizing Guide</a></li>
-                <li><a href="#">Shipping &amp; Returns</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><Link to="/#story">Our Story</Link></li>
+                <li><Link to="/size-guide">Sizing Guide</Link></li>
+                <li><Link to="/shipping">Shipping &amp; Returns</Link></li>
+                <li><Link to="/faq">FAQ</Link></li>
               </ul>
             </div>
             <div className="footer-col">
               <h4>CONNECT</h4>
               <ul>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">TikTok</a></li>
-                <li><a href="#">Twitter / X</a></li>
-                <li><a href="#">Contact Us</a></li>
+                <li><a href="https://instagram.com/madeitfox" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                <li><a href="https://tiktok.com/@madeitfox" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                <li><a href="https://x.com/madeitfox" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+                <li><a href="mailto:hello@madeitfox.com">Contact Us</a></li>
               </ul>
             </div>
           </div>
@@ -509,6 +511,9 @@ function ProductPage() {
                     </button>
                   ))}
                 </div>
+                {['statement-hoodie', 'bigben-tee', 'understated-tee'].includes(product.slug) && (
+                  <Link to="/size-guide" className="pp-size-guide-link">Size guide →</Link>
+                )}
               </div>
             )}
 
@@ -560,6 +565,9 @@ export default function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/shop/:slug" element={<ProductPage />} />
+      <Route path="/shipping" element={<ShippingPage />} />
+      <Route path="/faq" element={<FAQPage />} />
+      <Route path="/size-guide" element={<SizeGuidePage />} />
     </Routes>
   )
 }
