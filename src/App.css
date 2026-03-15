@@ -100,15 +100,14 @@
 }
 
 .bag-btn {
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #080808;
   background: var(--accent);
-  padding: 10px 22px;
+  padding: 10px 14px;
   transition: background 0.2s, transform 0.1s;
+  text-decoration: none;
 }
 
 .bag-btn:hover {
@@ -1042,12 +1041,24 @@ cite {
   color: var(--text);
 }
 
-.pp-atb {
+.pp-buy-now {
   width: 100%;
   padding: 18px;
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-size: 18px;
   letter-spacing: 0.2em;
   margin-top: 8px;
+}
+
+.pp-buy-now:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pp-buy-now:disabled:hover {
+  transform: none;
+  background: var(--accent);
 }
 
 .pp-accordion {

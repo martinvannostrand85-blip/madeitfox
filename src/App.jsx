@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom'
+import { products, getCheckoutUrl } from './data/products'
 import './App.css'
 
 function useScrollReveal() {
@@ -46,103 +47,15 @@ function FoxIcon() {
   )
 }
 
-const PRODUCTS = [
-  {
-    slug: 'statement-hoodie',
-    name: 'The Statement Hoodie',
-    price: 'from £34.99',
-    tag: 'FLAGSHIP',
-    desc: 'Started at the bottom. This hoodie didn\'t. Full-colour slogan artwork across the back with Big Ben, the phone box, and the London skyline. Embroidered fox head on the left chest. Premium black Gildan 18500 pullover hoodie.',
-    img: '/images/products/hoodie-back.png',
-    images: ['/images/products/hoodie-back.png', '/images/products/hoodie-front.png'],
-    sizes: [
-      { label: 'S', price: '£34.99' },
-      { label: 'M', price: '£34.99' },
-      { label: 'L', price: '£34.99' },
-      { label: 'XL', price: '£34.99' },
-      { label: '2XL', price: '£37.99' },
-      { label: '3XL', price: '£39.99' },
-      { label: '4XL', price: '£41.99' },
-      { label: '5XL', price: '£44.99' },
-    ],
-    colour: 'Black',
-    details: 'DTG printed back artwork. 50% cotton, 50% polyester. Pre-shrunk. Double-lined hood with matching drawcord. Front pouch pocket. Set-in sleeves.',
-  },
-  {
-    slug: 'bigben-tee',
-    name: 'Big Ben Graphic Tee',
-    price: 'from £17.99',
-    tag: 'ICONIC',
-    desc: 'The Made It Fox stands in front of Big Ben like he owns the place. Because he does. Full-colour front print on a premium Bella + Canvas 3001 tee.',
-    img: '/images/products/bigben-tee.png',
-    images: ['/images/products/bigben-tee.png'],
-    sizes: [
-      { label: 'XS', price: '£17.99' },
-      { label: 'S', price: '£17.99' },
-      { label: 'M', price: '£17.99' },
-      { label: 'L', price: '£17.99' },
-      { label: 'XL', price: '£17.99' },
-      { label: '2XL', price: '£19.99' },
-      { label: '3XL', price: '£21.99' },
-      { label: '4XL', price: '£24.99' },
-    ],
-    colour: 'Black',
-    details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
-  },
-  {
-    slug: 'understated-tee',
-    name: 'The Understated Tee',
-    price: 'from £17.99',
-    tag: 'CORE',
-    desc: 'Not everyone needs to know you made it. Small fox head on the chest. You know what it means. Clean navy Bella + Canvas 3001.',
-    img: '/images/products/understated-tee.png',
-    images: ['/images/products/understated-tee.png'],
-    sizes: [
-      { label: 'S', price: '£17.99' },
-      { label: 'M', price: '£17.99' },
-      { label: 'L', price: '£17.99' },
-      { label: 'XL', price: '£17.99' },
-      { label: '2XL', price: '£19.99' },
-    ],
-    colour: 'Navy',
-    details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
-  },
-  {
-    slug: 'snapback',
-    name: 'Top Hat Snapback',
-    price: '£25.99',
-    tag: 'HEADWEAR',
-    desc: 'Tip your hat to the hustle. Embroidered Made It Fox on a Yupoong 6089M classic snapback. Structured six-panel crown, flat brim, adjustable plastic snap closure.',
-    img: '/images/products/snapback.png',
-    images: ['/images/products/snapback.png'],
-    sizes: [{ label: 'One Size', price: '£25.99' }],
-    colour: 'Black',
-    details: 'Embroidered front panel. 80% acrylic, 20% wool. Green under-visor. Classic structured fit.',
-  },
-  {
-    slug: 'morning-mug',
-    name: 'Morning Fox Mug',
-    price: 'from £9.99',
-    tag: 'LIFESTYLE',
-    desc: 'Start your morning like you\'ve already made it. The Made It Fox and Big Ben on your morning brew. Dishwasher and microwave safe.',
-    img: '/images/products/mug.png',
-    images: ['/images/products/mug.png'],
-    variants: [{ label: '11oz', price: '£9.99' }, { label: '15oz', price: '£13.99' }],
-    colour: 'White',
-    details: 'Sublimation printed. White glossy ceramic. C-handle. Printed on both sides.',
-  },
-  {
-    slug: 'sticker',
-    name: 'Die-Cut Sticker',
-    price: 'from £3.99',
-    tag: 'STICKER',
-    desc: 'Stick it where it matters. Die-cut Made It Fox sticker with the full slogan artwork. Weatherproof vinyl, goes on laptops, water bottles, notebooks, anywhere.',
-    img: '/images/products/sticker.png',
-    images: ['/images/products/sticker.png'],
-    variants: [{ label: '3″', price: '£3.99' }, { label: '4″', price: '£4.49' }, { label: '5.5″', price: '£4.99' }],
-    details: 'Kiss-cut white vinyl. Indoor and outdoor use. Waterproof.',
-  },
-]
+function BagIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <path d="M16 10a4 4 0 01-8 0" />
+    </svg>
+  )
+}
 
 const DROPS = [
   { name: 'The Hustle', sub: 'While They Slept I Built' },
@@ -176,7 +89,6 @@ function HomePage() {
   useScrollReveal()
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
-  const [bagCount] = useState(0)
 
   function handleSubscribe(e) {
     e.preventDefault()
@@ -210,9 +122,9 @@ function HomePage() {
           <li><a href="#drops">DROPS</a></li>
           <li><a href="#lookbook">LOOKBOOK</a></li>
         </ul>
-        <button className="bag-btn" aria-label={`Shopping bag, ${bagCount} items`}>
-          BAG ({bagCount})
-        </button>
+        <a href="https://madeitfox.myshopify.com/cart" className="bag-btn" aria-label="View shopping cart">
+          <BagIcon />
+        </a>
         <button className="nav-hamburger" aria-label="Open menu">
           <span /><span /><span />
         </button>
@@ -264,7 +176,7 @@ function HomePage() {
       <section id="shop" className="products-section" aria-labelledby="shop-heading">
         <h2 className="section-title reveal" id="shop-heading">THE DROP</h2>
         <div className="products-grid">
-          {PRODUCTS.map((p, i) => (
+          {products.map((p, i) => (
             <Link
               key={p.slug}
               to={`/shop/${p.slug}`}
@@ -272,7 +184,7 @@ function HomePage() {
             >
               <div className="product-img">
                 <img
-                  src={p.img}
+                  src={p.images[0]}
                   alt={p.name}
                   className="product-img-photo"
                 />
@@ -280,12 +192,12 @@ function HomePage() {
               </div>
               <div className="product-info">
                 <h3>{p.name}</h3>
-                <p>{p.desc}</p>
+                <p>{p.description}</p>
                 <div className="product-footer">
-                  <span className="product-price">{p.price}</span>
-                  <button className="add-btn" aria-label={`View ${p.name}`}>
-                    ADD TO BAG
-                  </button>
+                  <span className="product-price">{p.basePrice}</span>
+                  <span className="add-btn" aria-label={`View ${p.name}`}>
+                    VIEW PRODUCT
+                  </span>
                 </div>
               </div>
             </Link>
@@ -416,7 +328,7 @@ function HomePage() {
 function ProductPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
-  const product = PRODUCTS.find(p => p.slug === slug)
+  const product = products.find(p => p.slug === slug)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -426,12 +338,10 @@ function ProductPage() {
     if (product) {
       document.title = `${product.name} | Made It Fox`
     }
+    return () => { document.title = 'Made It Fox | Started at the Bottom, Made It to the Top' }
   }, [product])
 
   const [selectedSize, setSelectedSize] = useState(null)
-  const [selectedVariant, setSelectedVariant] = useState(
-    product?.variants ? product.variants[0] : null
-  )
   const [activeImg, setActiveImg] = useState(0)
   const [detailsOpen, setDetailsOpen] = useState(false)
 
@@ -444,16 +354,23 @@ function ProductPage() {
     )
   }
 
-  // sizes are now { label, price } objects; variants are also { label, price }
-  const displayPrice = selectedVariant
-    ? selectedVariant.price
-    : selectedSize
-      ? selectedSize.price
-      : product.price
+  const displayPrice = selectedSize
+    ? `£${product.prices[selectedSize].toFixed(2)}`
+    : product.basePrice
+
+  const handleBuyNow = () => {
+    if (!selectedSize) return
+    const variantId = product.shopifyVariants[selectedSize]
+    if (variantId) {
+      window.location.href = getCheckoutUrl(variantId)
+    }
+  }
+
+  const isOneSize = product.sizes.length === 1 && product.sizes[0] === 'One size'
 
   return (
     <div className="product-page">
-      {/* Sticky nav — reuse from homepage */}
+      {/* Sticky nav */}
       <nav className="nav" aria-label="Main navigation">
         <Link to="/" className="nav-brand">MADE IT FOX</Link>
         <ul className="nav-links">
@@ -462,7 +379,9 @@ function ProductPage() {
           <li><Link to="/#drops">DROPS</Link></li>
           <li><Link to="/#lookbook">LOOKBOOK</Link></li>
         </ul>
-        <button className="bag-btn">BAG (0)</button>
+        <a href="https://madeitfox.myshopify.com/cart" className="bag-btn" aria-label="View shopping cart">
+          <BagIcon />
+        </a>
         <button className="nav-hamburger" aria-label="Open menu"><span /><span /><span /></button>
       </nav>
 
@@ -505,49 +424,47 @@ function ProductPage() {
               <p className="pp-colour">Colour: <span>{product.colour}</span></p>
             )}
 
-            <p className="pp-desc">{product.desc}</p>
+            <p className="pp-desc">{product.description}</p>
 
             {/* Size selector */}
-            {product.sizes && product.sizes[0].label !== 'One Size' && (
+            {!isOneSize && (
               <div className="pp-sizes">
                 <p className="pp-sizes-label">SIZE</p>
                 <div className="pp-sizes-grid">
                   {product.sizes.map(size => (
                     <button
-                      key={size.label}
-                      className={`pp-size-btn${selectedSize?.label === size.label ? ' pp-size-active' : ''}`}
+                      key={size}
+                      className={`pp-size-btn${selectedSize === size ? ' pp-size-active' : ''}`}
                       onClick={() => setSelectedSize(size)}
                     >
-                      {size.label}
+                      {size}
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            {product.sizes && product.sizes[0].label === 'One Size' && (
+            {isOneSize && (
               <p className="pp-onesize">One Size</p>
             )}
 
-            {/* Variant selector (mug/sticker) */}
-            {product.variants && (
-              <div className="pp-variants">
-                <p className="pp-sizes-label">SIZE</p>
-                <div className="pp-sizes-grid">
-                  {product.variants.map(v => (
-                    <button
-                      key={v.label}
-                      className={`pp-size-btn${selectedVariant?.label === v.label ? ' pp-size-active' : ''}`}
-                      onClick={() => setSelectedVariant(v)}
-                    >
-                      {v.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <button className="pp-atb add-btn">ADD TO BAG</button>
+            <button
+              className="pp-buy-now add-btn"
+              onClick={(e) => {
+                e.preventDefault()
+                if (isOneSize) {
+                  const variantId = product.shopifyVariants[product.sizes[0]]
+                  if (variantId) {
+                    window.location.href = getCheckoutUrl(variantId)
+                  }
+                } else {
+                  handleBuyNow()
+                }
+              }}
+              disabled={!isOneSize && !selectedSize}
+            >
+              {!isOneSize && !selectedSize ? 'SELECT A SIZE' : 'BUY NOW'}
+            </button>
 
             {/* Details accordion */}
             <div className="pp-accordion">
