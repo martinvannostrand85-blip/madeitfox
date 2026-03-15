@@ -89,13 +89,33 @@ function HomePage() {
   useScrollReveal()
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState(null)
 
-  function handleSubscribe(e) {
+  const handleSubscribe = async (e) => {
     e.preventDefault()
-    if (email) {
-      setSubmitted(true)
-      setEmail('')
+    setIsSubmitting(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/.netlify/functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      if (res.ok) {
+        setSubmitted(true)
+        setEmail('')
+      } else {
+        const data = await res.json()
+        setError(data.error || 'Something went wrong. Try again.')
+      }
+    } catch {
+      setError('Connection failed. Try again.')
     }
+
+    setIsSubmitting(false)
   }
 
   return (
@@ -273,9 +293,12 @@ function HomePage() {
                 required
                 aria-label="Email address"
               />
-              <button type="submit">SUBSCRIBE</button>
+              <button type="submit" disabled={isSubmitting}>
+                {isSubmitting ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
+              </button>
             </form>
           )}
+          {error && <p className="newsletter-error">{error}</p>}
         </div>
       </section>
 
@@ -337,8 +360,53 @@ function ProductPage() {
   useEffect(() => {
     if (product) {
       document.title = `${product.name} | Made It Fox`
+
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) metaDesc.setAttribute('content', product.description)
+
+      const ogTitle = document.querySelector('meta[property="og:title"]')
+      if (ogTitle) ogTitle.setAttribute('content', `${product.name} | Made It Fox`)
+
+      const ogDesc = document.querySelector('meta[property="og:description"]')
+      if (ogDesc) ogDesc.setAttribute('content', product.description)
+
+      const ogImage = document.querySelector('meta[property="og:image"]')
+      if (ogImage) ogImage.setAttribute('content', `https://madeitfox.com${product.images[0]}`)
+
+      const ogUrl = document.querySelector('meta[property="og:url"]')
+      if (ogUrl) ogUrl.setAttribute('content', `https://madeitfox.com/shop/${product.slug}`)
+
+      const structuredData = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.description,
+        image: `https://madeitfox.com${product.images[0]}`,
+        brand: { '@type': 'Brand', name: 'Made It Fox' },
+        offers: {
+          '@type': 'Offer',
+          priceCurrency: 'GBP',
+          price: product.prices[product.sizes[0]],
+          availability: 'https://schema.org/InStock',
+          url: `https://madeitfox.com/shop/${product.slug}`,
+          seller: { '@type': 'Organization', name: 'Made It Fox' },
+        },
+      }
+
+      const script = document.createElement('script')
+      script.type = 'application/ld+json'
+      script.id = 'product-structured-data'
+      script.textContent = JSON.stringify(structuredData)
+      document.head.appendChild(script)
     }
-    return () => { document.title = 'Made It Fox | Started at the Bottom, Made It to the Top' }
+
+    return () => {
+      document.title = 'Made It Fox | Started at the Bottom, Made It to the Top'
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) metaDesc.setAttribute('content', 'Urban streetwear for those who refused to quit. Inspired by the streets, built for the top. Premium hoodies, tees, caps and more.')
+      const existing = document.getElementById('product-structured-data')
+      if (existing) existing.remove()
+    }
   }, [product])
 
   const [selectedSize, setSelectedSize] = useState(null)

@@ -664,6 +664,16 @@ cite {
   margin-top: 20px;
 }
 
+.newsletter-error {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff4444;
+  margin-top: 16px;
+}
+
 /* ─── Footer ──────────────────────────────────────────────── */
 .footer {
   background: #060606;
