@@ -47,18 +47,46 @@ function FoxIcon() {
 
 const PRODUCTS = [
   {
-    name: 'The Windbreaker',
-    price: '£29.99',
-    tag: 'NEW DROP',
-    desc: 'Forest green. Fox on the chest. Built for the ones moving through the city at speed — whatever the weather.',
-    img: '/basic-unisex-windbreaker-forest-green-front-69b49deb93782.png',
+    name: 'The Statement Hoodie',
+    price: '£44.99',
+    tag: 'FLAGSHIP',
+    desc: 'Fox. Big Ben. Graffiti. The full story on one piece. If you only get one thing, make it this.',
+    img: 'https://files.catbox.moe/ehgr39.png',
   },
   {
-    name: 'The Zip Hoodie',
+    name: 'Big Ben Graphic Tee',
     price: '£29.99',
+    tag: 'ICONIC',
+    desc: 'The fox outside the tower. Top hat, bow tie, arms crossed. This is London. This is the story.',
+    img: 'https://files.catbox.moe/5belru.png',
+  },
+  {
+    name: 'The Understated Tee',
+    price: '£27.99',
     tag: 'CORE',
-    desc: 'Blacked out. Heavy blend. The fox rides the chest. For those who built something in the cold and never complained.',
-    img: '/unisex-heavy-blend-zip-hoodie-black-front-69b49bad4c8cd.png',
+    desc: 'No big statement. Just the fox. Clean navy. Those who know, know.',
+    img: 'https://files.catbox.moe/8a3f4a.png',
+  },
+  {
+    name: 'Top Hat Snapback',
+    price: '£29.99',
+    tag: 'HEADWEAR',
+    desc: 'The hat on the fox. Now on your head. One size. One story.',
+    img: 'https://files.catbox.moe/scff0b.png',
+  },
+  {
+    name: 'Morning Fox Mug',
+    price: 'from £14.99',
+    tag: 'LIFESTYLE',
+    desc: 'Start every morning at the top. Fox leaning on Big Ben before the world wakes up.',
+    img: 'https://files.catbox.moe/v7pdnz.png',
+  },
+  {
+    name: 'Die-Cut Sticker',
+    price: 'from £3.99',
+    tag: 'STICKER',
+    desc: 'Slap it anywhere. The fox goes everywhere you go. Three sizes.',
+    img: 'https://files.catbox.moe/7quse5.png',
   },
 ]
 
