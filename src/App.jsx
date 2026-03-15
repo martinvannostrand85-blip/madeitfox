@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route, Link, useNavigate, useParams } from 'react-router-dom'
 import './App.css'
 
 function useScrollReveal() {
@@ -47,46 +48,75 @@ function FoxIcon() {
 
 const PRODUCTS = [
   {
+    slug: 'statement-hoodie',
     name: 'The Statement Hoodie',
     price: '£44.99',
     tag: 'FLAGSHIP',
-    desc: 'Fox. Big Ben. Graffiti. The full story on one piece. If you only get one thing, make it this.',
-    img: 'https://files.catbox.moe/ehgr39.png',
+    desc: 'Started at the bottom. This hoodie didn\'t. Full-colour slogan artwork across the back with Big Ben, the phone box, and the London skyline. Embroidered fox head on the left chest. Premium black Gildan 18500 pullover hoodie.',
+    img: '/images/products/hoodie-back.png',
+    images: ['/images/products/hoodie-back.png', '/images/products/hoodie-front.png'],
+    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
+    colour: 'Black',
+    details: 'DTG printed back artwork. 50% cotton, 50% polyester. Pre-shrunk. Double-lined hood with matching drawcord. Front pouch pocket. Set-in sleeves.',
   },
   {
+    slug: 'bigben-tee',
     name: 'Big Ben Graphic Tee',
     price: '£29.99',
     tag: 'ICONIC',
-    desc: 'The fox outside the tower. Top hat, bow tie, arms crossed. This is London. This is the story.',
-    img: 'https://files.catbox.moe/5belru.png',
+    desc: 'The Made It Fox stands in front of Big Ben like he owns the place. Because he does. Full-colour front print on a premium Bella + Canvas 3001 tee.',
+    img: '/images/products/bigben-tee.png',
+    images: ['/images/products/bigben-tee.png'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
+    colour: 'Black',
+    details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
   },
   {
+    slug: 'understated-tee',
     name: 'The Understated Tee',
     price: '£27.99',
     tag: 'CORE',
-    desc: 'No big statement. Just the fox. Clean navy. Those who know, know.',
-    img: 'https://files.catbox.moe/8a3f4a.png',
+    desc: 'Not everyone needs to know you made it. Small fox head on the chest. You know what it means. Clean navy Bella + Canvas 3001.',
+    img: '/images/products/understated-tee.png',
+    images: ['/images/products/understated-tee.png'],
+    sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    colour: 'Navy',
+    details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
   },
   {
+    slug: 'snapback',
     name: 'Top Hat Snapback',
     price: '£29.99',
     tag: 'HEADWEAR',
-    desc: 'The hat on the fox. Now on your head. One size. One story.',
-    img: 'https://files.catbox.moe/scff0b.png',
+    desc: 'Tip your hat to the hustle. Embroidered Made It Fox on a Yupoong 6089M classic snapback. Structured six-panel crown, flat brim, adjustable plastic snap closure.',
+    img: '/images/products/snapback.png',
+    images: ['/images/products/snapback.png'],
+    sizes: ['One Size'],
+    colour: 'Black',
+    details: 'Embroidered front panel. 80% acrylic, 20% wool. Green under-visor. Classic structured fit.',
   },
   {
+    slug: 'morning-mug',
     name: 'Morning Fox Mug',
     price: 'from £14.99',
     tag: 'LIFESTYLE',
-    desc: 'Start every morning at the top. Fox leaning on Big Ben before the world wakes up.',
-    img: 'https://files.catbox.moe/v7pdnz.png',
+    desc: 'Start your morning like you\'ve already made it. The Made It Fox and Big Ben on your morning brew. Dishwasher and microwave safe.',
+    img: '/images/products/mug.png',
+    images: ['/images/products/mug.png'],
+    variants: [{ label: '11oz', price: '£14.99' }, { label: '15oz', price: '£17.99' }],
+    colour: 'White',
+    details: 'Sublimation printed. White glossy ceramic. C-handle. Printed on both sides.',
   },
   {
+    slug: 'sticker',
     name: 'Die-Cut Sticker',
     price: 'from £3.99',
     tag: 'STICKER',
-    desc: 'Slap it anywhere. The fox goes everywhere you go. Three sizes.',
-    img: 'https://files.catbox.moe/7quse5.png',
+    desc: 'Stick it where it matters. Die-cut Made It Fox sticker with the full slogan artwork. Weatherproof vinyl, goes on laptops, water bottles, notebooks, anywhere.',
+    img: '/images/products/sticker.png',
+    images: ['/images/products/sticker.png'],
+    variants: [{ label: '3″', price: '£3.99' }, { label: '4″', price: '£4.99' }, { label: '5.5″', price: '£5.99' }],
+    details: 'Kiss-cut white vinyl. Indoor and outdoor use. Waterproof.',
   },
 ]
 
@@ -118,7 +148,7 @@ const MARQUEE_ITEMS = [
   { type: 'dot' },
 ]
 
-export default function App() {
+function HomePage() {
   useScrollReveal()
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -149,7 +179,7 @@ export default function App() {
 
       {/* ── Navigation ── */}
       <nav className="nav" aria-label="Main navigation">
-        <a href="#" className="nav-brand">MADE IT FOX</a>
+        <Link to="/" className="nav-brand">MADE IT FOX</Link>
         <ul className="nav-links">
           <li><a href="#shop">SHOP</a></li>
           <li><a href="#story">STORY</a></li>
@@ -211,8 +241,9 @@ export default function App() {
         <h2 className="section-title reveal" id="shop-heading">THE DROP</h2>
         <div className="products-grid">
           {PRODUCTS.map((p, i) => (
-            <article
-              key={p.name}
+            <Link
+              key={p.slug}
+              to={`/shop/${p.slug}`}
               className={`product-card reveal reveal-delay-${i + 1}`}
             >
               <div className="product-img">
@@ -228,12 +259,12 @@ export default function App() {
                 <p>{p.desc}</p>
                 <div className="product-footer">
                   <span className="product-price">{p.price}</span>
-                  <button className="add-btn" aria-label={`Add ${p.name} to bag`}>
+                  <button className="add-btn" aria-label={`View ${p.name}`}>
                     ADD TO BAG
                   </button>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
@@ -355,5 +386,166 @@ export default function App() {
         </div>
       </footer>
     </div>
+  )
+}
+
+function ProductPage() {
+  const { slug } = useParams()
+  const navigate = useNavigate()
+  const product = PRODUCTS.find(p => p.slug === slug)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [slug])
+
+  useEffect(() => {
+    if (product) {
+      document.title = `${product.name} | Made It Fox`
+    }
+  }, [product])
+
+  const [selectedSize, setSelectedSize] = useState(null)
+  const [selectedVariant, setSelectedVariant] = useState(
+    product?.variants ? product.variants[0] : null
+  )
+  const [activeImg, setActiveImg] = useState(0)
+  const [detailsOpen, setDetailsOpen] = useState(false)
+
+  if (!product) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: '24px', background: '#080808' }}>
+        <p style={{ fontFamily: 'var(--font-heading)', color: 'var(--muted)', letterSpacing: '0.1em' }}>PRODUCT NOT FOUND</p>
+        <button className="add-btn" onClick={() => navigate('/')}>BACK TO SHOP</button>
+      </div>
+    )
+  }
+
+  const displayPrice = selectedVariant ? selectedVariant.price : product.price
+
+  return (
+    <div className="product-page">
+      {/* Sticky nav — reuse from homepage */}
+      <nav className="nav" aria-label="Main navigation">
+        <Link to="/" className="nav-brand">MADE IT FOX</Link>
+        <ul className="nav-links">
+          <li><Link to="/#shop">SHOP</Link></li>
+          <li><Link to="/#story">STORY</Link></li>
+          <li><Link to="/#drops">DROPS</Link></li>
+          <li><Link to="/#lookbook">LOOKBOOK</Link></li>
+        </ul>
+        <button className="bag-btn">BAG (0)</button>
+        <button className="nav-hamburger" aria-label="Open menu"><span /><span /><span /></button>
+      </nav>
+
+      <div className="pp-container">
+        {/* Back link */}
+        <Link to="/#shop" className="pp-back">← Back to The Drop</Link>
+
+        <div className="pp-layout">
+          {/* Left: images */}
+          <div className="pp-images">
+            <div className="pp-main-img">
+              <img
+                src={product.images[activeImg]}
+                alt={product.name}
+                className="pp-main-img-el"
+              />
+            </div>
+            {product.images.length > 1 && (
+              <div className="pp-thumbs">
+                {product.images.map((img, i) => (
+                  <button
+                    key={i}
+                    className={`pp-thumb${activeImg === i ? ' pp-thumb-active' : ''}`}
+                    onClick={() => setActiveImg(i)}
+                    aria-label={`View image ${i + 1}`}
+                  >
+                    <img src={img} alt="" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: details */}
+          <div className="pp-details">
+            <span className="product-tag pp-tag">{product.tag}</span>
+            <h1 className="pp-name">{product.name}</h1>
+            <p className="pp-price">{displayPrice}</p>
+            {product.colour && (
+              <p className="pp-colour">Colour: <span>{product.colour}</span></p>
+            )}
+
+            <p className="pp-desc">{product.desc}</p>
+
+            {/* Size selector */}
+            {product.sizes && product.sizes[0] !== 'One Size' && (
+              <div className="pp-sizes">
+                <p className="pp-sizes-label">SIZE</p>
+                <div className="pp-sizes-grid">
+                  {product.sizes.map(size => (
+                    <button
+                      key={size}
+                      className={`pp-size-btn${selectedSize === size ? ' pp-size-active' : ''}`}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {product.sizes && product.sizes[0] === 'One Size' && (
+              <p className="pp-onesize">One Size</p>
+            )}
+
+            {/* Variant selector (mug/sticker) */}
+            {product.variants && (
+              <div className="pp-variants">
+                <p className="pp-sizes-label">SIZE</p>
+                <div className="pp-sizes-grid">
+                  {product.variants.map(v => (
+                    <button
+                      key={v.label}
+                      className={`pp-size-btn${selectedVariant?.label === v.label ? ' pp-size-active' : ''}`}
+                      onClick={() => setSelectedVariant(v)}
+                    >
+                      {v.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <button className="pp-atb add-btn">ADD TO BAG</button>
+
+            {/* Details accordion */}
+            <div className="pp-accordion">
+              <button
+                className="pp-accordion-trigger"
+                onClick={() => setDetailsOpen(o => !o)}
+                aria-expanded={detailsOpen}
+              >
+                <span>PRODUCT DETAILS</span>
+                <span className="pp-accordion-icon">{detailsOpen ? '−' : '+'}</span>
+              </button>
+              {detailsOpen && (
+                <p className="pp-accordion-body">{product.details}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/shop/:slug" element={<ProductPage />} />
+    </Routes>
   )
 }

@@ -851,3 +851,261 @@ cite {
     gap: 32px;
   }
 }
+
+/* ─── Product Page ────────────────────────────────────── */
+.product-page {
+  min-height: 100svh;
+  background: var(--bg);
+}
+
+.pp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 40px 120px;
+}
+
+.pp-back {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-block;
+  margin-bottom: 48px;
+  transition: color 0.2s;
+}
+
+.pp-back:hover {
+  color: var(--accent);
+}
+
+.pp-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.pp-images {
+  position: sticky;
+  top: 88px;
+}
+
+.pp-main-img {
+  background: #f5f0e8;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.pp-main-img-el {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 32px;
+  mix-blend-mode: multiply;
+}
+
+.pp-thumbs {
+  display: flex;
+  gap: 8px;
+}
+
+.pp-thumb {
+  width: 72px;
+  height: 72px;
+  background: #f5f0e8;
+  border: 2px solid transparent;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.pp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  padding: 6px;
+}
+
+.pp-thumb:hover {
+  border-color: var(--muted);
+}
+
+.pp-thumb-active {
+  border-color: var(--accent) !important;
+}
+
+.pp-details {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.pp-tag {
+  position: static;
+  display: inline-block;
+}
+
+.pp-name {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.pp-price {
+  font-family: var(--font-body);
+  font-size: 24px;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+.pp-colour {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pp-colour span {
+  color: var(--text);
+}
+
+.pp-desc {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+.pp-sizes-label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.pp-sizes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pp-size-btn {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(245, 240, 232, 0.2);
+  background: transparent;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  border-radius: 2px;
+}
+
+.pp-size-btn:hover {
+  border-color: var(--muted);
+  color: var(--text);
+}
+
+.pp-size-active {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+  background: rgba(255, 69, 0, 0.08) !important;
+}
+
+.pp-onesize {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.pp-atb {
+  width: 100%;
+  padding: 18px;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  margin-top: 8px;
+}
+
+.pp-accordion {
+  border-top: 1px solid var(--border);
+}
+
+.pp-accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pp-accordion-trigger:hover {
+  color: var(--accent);
+}
+
+.pp-accordion-icon {
+  font-size: 20px;
+  font-family: var(--font-body);
+  color: var(--accent);
+}
+
+.pp-accordion-body {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  padding-bottom: 24px;
+}
+
+@media (max-width: 768px) {
+  .pp-container {
+    padding: 24px 20px 80px;
+  }
+
+  .pp-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .pp-images {
+    position: static;
+  }
+
+  .pp-back {
+    margin-bottom: 32px;
+  }
+}
