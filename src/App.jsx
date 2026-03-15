@@ -50,60 +50,84 @@ const PRODUCTS = [
   {
     slug: 'statement-hoodie',
     name: 'The Statement Hoodie',
-    price: '£44.99',
+    price: 'from £34.99',
     tag: 'FLAGSHIP',
     desc: 'Started at the bottom. This hoodie didn\'t. Full-colour slogan artwork across the back with Big Ben, the phone box, and the London skyline. Embroidered fox head on the left chest. Premium black Gildan 18500 pullover hoodie.',
     img: '/images/products/hoodie-back.png',
     images: ['/images/products/hoodie-back.png', '/images/products/hoodie-front.png'],
-    sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'],
+    sizes: [
+      { label: 'S', price: '£34.99' },
+      { label: 'M', price: '£34.99' },
+      { label: 'L', price: '£34.99' },
+      { label: 'XL', price: '£34.99' },
+      { label: '2XL', price: '£37.99' },
+      { label: '3XL', price: '£39.99' },
+      { label: '4XL', price: '£41.99' },
+      { label: '5XL', price: '£44.99' },
+    ],
     colour: 'Black',
     details: 'DTG printed back artwork. 50% cotton, 50% polyester. Pre-shrunk. Double-lined hood with matching drawcord. Front pouch pocket. Set-in sleeves.',
   },
   {
     slug: 'bigben-tee',
     name: 'Big Ben Graphic Tee',
-    price: '£29.99',
+    price: 'from £17.99',
     tag: 'ICONIC',
     desc: 'The Made It Fox stands in front of Big Ben like he owns the place. Because he does. Full-colour front print on a premium Bella + Canvas 3001 tee.',
     img: '/images/products/bigben-tee.png',
     images: ['/images/products/bigben-tee.png'],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
+    sizes: [
+      { label: 'XS', price: '£17.99' },
+      { label: 'S', price: '£17.99' },
+      { label: 'M', price: '£17.99' },
+      { label: 'L', price: '£17.99' },
+      { label: 'XL', price: '£17.99' },
+      { label: '2XL', price: '£19.99' },
+      { label: '3XL', price: '£21.99' },
+      { label: '4XL', price: '£24.99' },
+    ],
     colour: 'Black',
     details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
   },
   {
     slug: 'understated-tee',
     name: 'The Understated Tee',
-    price: '£27.99',
+    price: 'from £17.99',
     tag: 'CORE',
     desc: 'Not everyone needs to know you made it. Small fox head on the chest. You know what it means. Clean navy Bella + Canvas 3001.',
     img: '/images/products/understated-tee.png',
     images: ['/images/products/understated-tee.png'],
-    sizes: ['S', 'M', 'L', 'XL', '2XL'],
+    sizes: [
+      { label: 'S', price: '£17.99' },
+      { label: 'M', price: '£17.99' },
+      { label: 'L', price: '£17.99' },
+      { label: 'XL', price: '£17.99' },
+      { label: '2XL', price: '£19.99' },
+    ],
     colour: 'Navy',
     details: 'DTG printed. 100% combed ringspun cotton. Side-seamed construction. Shoulder-to-shoulder taping. Retail fit.',
   },
   {
     slug: 'snapback',
     name: 'Top Hat Snapback',
-    price: '£29.99',
+    price: '£25.99',
     tag: 'HEADWEAR',
     desc: 'Tip your hat to the hustle. Embroidered Made It Fox on a Yupoong 6089M classic snapback. Structured six-panel crown, flat brim, adjustable plastic snap closure.',
     img: '/images/products/snapback.png',
     images: ['/images/products/snapback.png'],
-    sizes: ['One Size'],
+    sizes: [{ label: 'One Size', price: '£25.99' }],
     colour: 'Black',
     details: 'Embroidered front panel. 80% acrylic, 20% wool. Green under-visor. Classic structured fit.',
   },
   {
     slug: 'morning-mug',
     name: 'Morning Fox Mug',
-    price: 'from £14.99',
+    price: 'from £9.99',
     tag: 'LIFESTYLE',
     desc: 'Start your morning like you\'ve already made it. The Made It Fox and Big Ben on your morning brew. Dishwasher and microwave safe.',
     img: '/images/products/mug.png',
     images: ['/images/products/mug.png'],
-    variants: [{ label: '11oz', price: '£14.99' }, { label: '15oz', price: '£17.99' }],
+    variants: [{ label: '11oz', price: '£9.99' }, { label: '15oz', price: '£13.99' }],
     colour: 'White',
     details: 'Sublimation printed. White glossy ceramic. C-handle. Printed on both sides.',
   },
@@ -115,7 +139,7 @@ const PRODUCTS = [
     desc: 'Stick it where it matters. Die-cut Made It Fox sticker with the full slogan artwork. Weatherproof vinyl, goes on laptops, water bottles, notebooks, anywhere.',
     img: '/images/products/sticker.png',
     images: ['/images/products/sticker.png'],
-    variants: [{ label: '3″', price: '£3.99' }, { label: '4″', price: '£4.99' }, { label: '5.5″', price: '£5.99' }],
+    variants: [{ label: '3″', price: '£3.99' }, { label: '4″', price: '£4.49' }, { label: '5.5″', price: '£4.99' }],
     details: 'Kiss-cut white vinyl. Indoor and outdoor use. Waterproof.',
   },
 ]
@@ -420,7 +444,12 @@ function ProductPage() {
     )
   }
 
-  const displayPrice = selectedVariant ? selectedVariant.price : product.price
+  // sizes are now { label, price } objects; variants are also { label, price }
+  const displayPrice = selectedVariant
+    ? selectedVariant.price
+    : selectedSize
+      ? selectedSize.price
+      : product.price
 
   return (
     <div className="product-page">
@@ -479,24 +508,24 @@ function ProductPage() {
             <p className="pp-desc">{product.desc}</p>
 
             {/* Size selector */}
-            {product.sizes && product.sizes[0] !== 'One Size' && (
+            {product.sizes && product.sizes[0].label !== 'One Size' && (
               <div className="pp-sizes">
                 <p className="pp-sizes-label">SIZE</p>
                 <div className="pp-sizes-grid">
                   {product.sizes.map(size => (
                     <button
-                      key={size}
-                      className={`pp-size-btn${selectedSize === size ? ' pp-size-active' : ''}`}
+                      key={size.label}
+                      className={`pp-size-btn${selectedSize?.label === size.label ? ' pp-size-active' : ''}`}
                       onClick={() => setSelectedSize(size)}
                     >
-                      {size}
+                      {size.label}
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            {product.sizes && product.sizes[0] === 'One Size' && (
+            {product.sizes && product.sizes[0].label === 'One Size' && (
               <p className="pp-onesize">One Size</p>
             )}
 
