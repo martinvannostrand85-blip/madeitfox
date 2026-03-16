@@ -489,96 +489,6 @@ cite {
   line-height: 1 !important;
 }
 
-/* ─── Upcoming Drops ──────────────────────────────────── */
-.drops-section {
-  padding: 120px 40px;
-  background: #0a0a0a;
-}
-
-.drops-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.drop-card {
-  aspect-ratio: 1;
-  position: relative;
-  overflow: hidden;
-  background: #111;
-  cursor: pointer;
-}
-
-.drop-card:hover .drop-overlay {
-  background: rgba(8,8,8,0.78);
-}
-
-.drop-card:hover .drop-img-inner svg {
-  opacity: 0.18;
-  transform: scale(1.05);
-}
-
-.drop-img-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.drop-img-inner svg {
-  width: 45%;
-  height: 45%;
-  opacity: 0.07;
-  transition: opacity 0.4s ease, transform 0.5s ease;
-}
-
-.drop-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8,8,8,0.55);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 28px;
-  transition: background 0.3s;
-}
-
-.drop-tag {
-  font-family: var(--font-heading);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 4px 10px;
-  margin-bottom: 14px;
-  display: inline-block;
-}
-
-.drop-name {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2.2vw, 30px);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 8px;
-  line-height: 1;
-}
-
-.drop-sub {
-  font-family: var(--font-serif);
-  font-size: clamp(11px, 1.1vw, 14px);
-  font-style: italic;
-  color: var(--muted);
-  line-height: 1.4;
-  margin: 0;
-}
-
 /* ─── Newsletter ─────────────────────────────────────────── */
 .newsletter-section {
   padding: 140px 40px;
@@ -772,9 +682,6 @@ cite {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .drops-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -798,7 +705,6 @@ cite {
   .moment-section,
   .products-section,
   .story-section,
-  .drops-section,
   .newsletter-section {
     padding: 80px 20px;
   }
@@ -807,9 +713,6 @@ cite {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .drops-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
   .footer {
     padding: 60px 20px 32px;
@@ -850,10 +753,6 @@ cite {
 @media (max-width: 480px) {
   .nav-brand {
     font-size: 20px;
-  }
-
-  .drops-grid {
-    grid-template-columns: 1fr;
   }
 
   .footer-cols {

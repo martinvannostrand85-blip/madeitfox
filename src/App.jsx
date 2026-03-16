@@ -60,15 +60,6 @@ function BagIcon() {
   )
 }
 
-const DROPS = [
-  { name: 'The Hustle', sub: 'While They Slept I Built' },
-  { name: 'The Night Shift', sub: 'The City Never Sleeps Neither Do I' },
-  { name: 'Top Floor', sub: 'View From the Top' },
-  { name: 'The Comeback', sub: 'They Wrote Me Off I Wrote Back' },
-  { name: 'Old Money', sub: 'Earned Not Given' },
-  { name: 'The Origins', sub: 'From the Bottom of Africa to the Top of London' },
-]
-
 const MARQUEE_ITEMS = [
   { type: 'text', content: 'PUT HIM ON THE MERCH — RYAN GOSLING' },
   { type: 'dot' },
@@ -142,7 +133,6 @@ function HomePage() {
         <ul className="nav-links">
           <li><a href="#shop">SHOP</a></li>
           <li><a href="#story">STORY</a></li>
-          <li><a href="#drops">DROPS</a></li>
           <li><a href="#lookbook">LOOKBOOK</a></li>
         </ul>
         <a href="https://madeitfox.myshopify.com/cart" className="bag-btn" aria-label="View shopping cart">
@@ -254,28 +244,6 @@ function HomePage() {
             </p>
             <p className="story-tagline">The fox always finds a way.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ── Upcoming Drops ── */}
-      <section id="drops" className="drops-section" aria-labelledby="drops-heading">
-        <h2 className="section-title reveal" id="drops-heading">COMING SOON</h2>
-        <div className="drops-grid">
-          {DROPS.map((d, i) => (
-            <div
-              key={d.name}
-              className={`drop-card reveal reveal-delay-${(i % 3) + 1}`}
-            >
-              <div className="drop-img-inner" aria-hidden="true">
-                <FoxIcon />
-              </div>
-              <div className="drop-overlay">
-                <span className="drop-tag">TEASER</span>
-                <h3 className="drop-name">{d.name}</h3>
-                <p className="drop-sub">"{d.sub}"</p>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -446,7 +414,6 @@ function ProductPage() {
         <ul className="nav-links">
           <li><Link to="/#shop">SHOP</Link></li>
           <li><Link to="/#story">STORY</Link></li>
-          <li><Link to="/#drops">DROPS</Link></li>
           <li><Link to="/#lookbook">LOOKBOOK</Link></li>
         </ul>
         <a href="https://madeitfox.myshopify.com/cart" className="bag-btn" aria-label="View shopping cart">

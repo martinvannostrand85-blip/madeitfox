@@ -56,7 +56,6 @@ export default function FAQPage() {
         <ul className="nav-links">
           <li><Link to="/#shop">SHOP</Link></li>
           <li><Link to="/#story">STORY</Link></li>
-          <li><Link to="/#drops">DROPS</Link></li>
           <li><Link to="/#lookbook">LOOKBOOK</Link></li>
         </ul>
         <a href="https://madeitfox.myshopify.com/cart" className="bag-btn" aria-label="View shopping cart">
