@@ -301,7 +301,7 @@ function HomePage() {
             <div className="footer-col">
               <h4>CONNECT</h4>
               <ul>
-                <li><a href="https://instagram.com/madeitfox" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                <li><a href="https://instagram.com/madeitfoxuk" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                 <li><a href="https://tiktok.com/@madeitfox" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                 <li><a href="https://x.com/madeitfox" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
                 <li><a href="mailto:hello@madeitfox.com">Contact Us</a></li>
